@@ -1,5 +1,8 @@
 import random
 
+yep = ["Y", "y"]
+nope = ["N", "n"]
+
 
 # Returns x position in the grid for a specific index
 def getX(index, size):
@@ -39,7 +42,18 @@ def randomNumber(characters):
 
 
 # Makes randomly generated matrix
-def makeInput(size=random.randint(2, 5)):
+def makeInput(size=0):
+    if not size:
+        mode = input("Do you want to select a size? (Y/N)")
+
+        if mode in yep:
+            size = int(input("Enter size: "))
+        elif mode in nope:
+            size = random.randint(2, 6)
+        else:
+            print("Learn to choose please...")
+            size = 6
+
     matrix = []
     characters = []
     index = 0x61
@@ -89,8 +103,15 @@ def multiply(items):
 
 def getDeterminant(matrix=[]):
     if not matrix:
-        pack = makeInput(3)
-        print(pack)
+        mode = input("Do you want to insert a matrix? (Y/N)")
+        if mode in yep:
+            pack = getInput()
+        elif mode in nope:
+            pack = makeInput()
+            print(pack)
+        else:
+            print("Learn to choose please...")
+            pack = makeInput(6)
         matrix = pack[0]
         size = pack[1]
     else:
@@ -122,7 +143,7 @@ def getDeterminant(matrix=[]):
             result += " -"
         else:
             result += " +"
-        result += matrix[subDet][0] + "("
+        result += matrix[subDet][0]
 
         for i in range(size):
             column = []
@@ -133,7 +154,7 @@ def getDeterminant(matrix=[]):
             tinyDet.append(column)
         print("tinyDET:")
         print(tinyDet)
-        result += getDeterminant(tinyDet) + ")"
+        result += "[" + getDeterminant(tinyDet) + "]"
 
     # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
     return result
