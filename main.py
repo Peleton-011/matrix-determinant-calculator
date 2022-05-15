@@ -13,19 +13,29 @@ def getY(index, size):
 
 # Makes a random parameter to place in a slot
 def randomNumber(characters):
+    hasNumber = False
     character = ""
     maxlen = len(characters) - 1
 
+    if not random.randint(0, 3):
+        return "0"
     # Randomly choose the sign of the number
     if random.randint(0, 1):
         character += "-"
 
     # Randomly add a number to the parameter
     while random.randint(0, 1):
-        character += str(random.randint(0, 9))
+        newNum = str(random.randint(0, 9))
+        if (newNum == "0") and (not hasNumber):
+            continue
+        hasNumber = True
+        character += newNum
 
     # Add a random character to the parameter
-    character += characters[random.randint(0, maxlen)]
+    if random.randint(0, 1) or (not hasNumber):
+        character += characters[random.randint(0, maxlen)]
+
+    return character
 
 
 # Makes randomly generated matrix
