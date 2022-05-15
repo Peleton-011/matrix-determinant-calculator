@@ -101,9 +101,11 @@ def getDeterminant(matrix=[]):
     # Solves a 2x2 determinant
 
     if size < 3:
-        resultPart1 = "( " + multiply([matrix[0][0], matrix[1][1]]) + " - "
-        resultPart2 = multiply([matrix[1][0], matrix[0][1]]) + " )"
-        result += resultPart1 + resultPart2
+        resultPart1 = multiply([matrix[0][0], matrix[1][1]])
+        resultPart2 = multiply([matrix[1][0], matrix[0][1]])
+        if (resultPart1 == "0") and (resultPart2 == "0"):
+            return "0"
+        result += resultPart1 + " - " + resultPart2
         return result
 
     # Solves any determinant recursively
@@ -132,7 +134,7 @@ def getDeterminant(matrix=[]):
             tinyDet.append(column)
         print("tinyDET:")
         print(tinyDet)
-        result += getDeterminant(tinyDet)
+        result += getDeterminant(tinyDet) + ")"
 
     # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
     return result
