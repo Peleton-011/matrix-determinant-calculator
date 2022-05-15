@@ -92,4 +92,28 @@ def getDeterminant():
         result += resultPart1 + resultPart2
         return result
 
+    # Solves any determinant recursively
+
+    for subDet in range(size):
+
+        tinyDet = []
+
+        if (subDet % 2) == 1:
+            result += " - "
+        else:
+            result += " + "
+
+        result += "( "
+
+        for i in range(size):
+            column = []
+            if i == subDet:
+                continue
+            for j in range(size - 1):
+                column.append(matrix[i][j + 1])
+            tinyDet.append(column)
+
+        print(tinyDet)
+    # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
+
 print(makeInput())
