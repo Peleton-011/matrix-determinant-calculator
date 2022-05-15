@@ -57,7 +57,7 @@ def makeInput(size=random.randint(2, 5)):
     for x in range(size * size):
         matrix[getX(x, size)].append(randomNumber(characters))
 
-    return matrix
+    return [matrix, size]
 
 
 # Takes input matrix.
@@ -77,8 +77,19 @@ def getInput():
     return [matrix, size]
 
 
+def multiply(items):
+    result = ""
+    for i in range(len(items)):
+        if items[i] == "0":
+            return "0"
+        result += str(items[i]) + " * "
+    result = result[:-3]
+    return result
+
+
 def getDeterminant():
-    pack = getInput()
+    pack = makeInput(3)
+    print(pack)
 
     matrix = pack[0]
     size = pack[1]
@@ -87,8 +98,8 @@ def getDeterminant():
     # Solves a 2x2 determinant
 
     if size < 3:
-        resultPart1 = "( " + str(matrix[0][0]) + " * " + str(matrix[1][1]) + " - "
-        resultPart2 = str(matrix[1][0]) + " * " + str(matrix[0][1])
+        resultPart1 = "( " + multiply([matrix[0][0], matrix[1][1]]) + " - "
+        resultPart2 = multiply([matrix[0][0], matrix[1][1]]) + " )"
         result += resultPart1 + resultPart2
         return result
 
@@ -116,4 +127,5 @@ def getDeterminant():
         print(tinyDet)
     # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
 
-print(makeInput())
+
+print(getDeterminant())
