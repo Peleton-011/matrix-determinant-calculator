@@ -71,13 +71,25 @@ def getInput():
 
     # Ask for each cell's value individually
     for i in range(size * size):
-        inputPrompt = "Insert cell " + str(getX(i, size)) + " , " + str(getY(i, size))
+        inputPrompt = "Insert cell " + str(getX(i, size)) + " , " + str(getY(i, size)) + ": "
         matrix[getX(i, size)].append(input(inputPrompt))
 
     return [matrix, size]
 
 
 def getDeterminant():
-    return
+    pack = getInput()
+
+    matrix = pack[0]
+    size = pack[1]
+    result = ""
+
+    # Solves a 2x2 determinant
+
+    if size < 3:
+        resultPart1 = "( " + str(matrix[0][0]) + " * " + str(matrix[1][1]) + " - "
+        resultPart2 = str(matrix[1][0]) + " * " + str(matrix[0][1])
+        result += resultPart1 + resultPart2
+        return result
 
 print(makeInput())
