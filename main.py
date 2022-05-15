@@ -3,23 +3,27 @@ import random
 
 # Returns x position in the grid for a specific index 
 def getX(index, size):
-    return index%size
+    return index % size
 
 # Returns y position in the grid for a specific index
 def getY(index, size):
-    return int(index/size) 
+    return int(index / size) 
 
-#Makes a random parameter to place in a slot
+# Makes a random parameter to place in a slot
 def randomNumber(characters):
     character = ""
+    maxlen = len(characters) - 1
+    
+    # Randomly choose the sign of the number
     if random.randint(0, 1):
         character += "-"
-    while True:
-        if random.randint(0, 1):
-            break
+    
+    # Randomly add a number to the parameter
+    while random.randint(0, 1):
         character += str(random.randint(0, 9)
-    maxlen = len(characters)
-    random.randint(0,maxlen-1)
+
+    # Add a random character to the parameter
+    character += characters[random.randint(0, maxlen)]
     
     
 # Takes input matrix. Mode 0 is automatic
@@ -45,9 +49,7 @@ def getInput (mode = 0):
     for x in range(dim*dim):
         matrix[getX(x, dim)].append(randomNumber(characters))
         
-        
-    
-    return 
+    return characters 
 def getDeterminant():
     return
 print(getInput())
