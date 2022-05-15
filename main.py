@@ -78,28 +78,31 @@ def getInput():
 
 
 def multiply(items):
-    result = ""
+    result = "("
     for i in range(len(items)):
         if items[i] == "0":
             return "0"
         result += str(items[i]) + " * "
     result = result[:-3]
+    result += ")"
     return result
 
 
-def getDeterminant():
-    pack = makeInput(3)
-    print(pack)
-
-    matrix = pack[0]
-    size = pack[1]
+def getDeterminant(matrix=[]):
+    if not matrix:
+        pack = makeInput(3)
+        print(pack)
+        matrix = pack[0]
+        size = pack[1]
+    else:
+        size = len(matrix[0])
     result = ""
 
     # Solves a 2x2 determinant
 
     if size < 3:
         resultPart1 = "( " + multiply([matrix[0][0], matrix[1][1]]) + " - "
-        resultPart2 = multiply([matrix[0][0], matrix[1][1]]) + " )"
+        resultPart2 = multiply([matrix[1][0], matrix[0][1]]) + " )"
         result += resultPart1 + resultPart2
         return result
 
@@ -107,14 +110,18 @@ def getDeterminant():
 
     for subDet in range(size):
 
+        # If the subdeterminant number is 0 ignore that subdeterminant
+        if matrix[subDet][0] == "0":
+            continue
+
+        # Creates the subdeterminant matrix
         tinyDet = []
 
         if (subDet % 2) == 1:
-            result += " - "
+            result += " -"
         else:
-            result += " + "
-
-        result += "( "
+            result += " +"
+        result += matrix[subDet][0] + "("
 
         for i in range(size):
             column = []
@@ -123,9 +130,12 @@ def getDeterminant():
             for j in range(size - 1):
                 column.append(matrix[i][j + 1])
             tinyDet.append(column)
-
+        print("tinyDET:")
         print(tinyDet)
+        result += getDeterminant(tinyDet)
+
     # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
+    return result
 
 
 print(getDeterminant())
