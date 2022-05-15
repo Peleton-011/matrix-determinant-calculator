@@ -43,7 +43,6 @@ def makeInput(size=random.randint(2, 5)):
     matrix = []
     characters = []
     index = 0x61
-    j = 0
 
     # Make legal character list
     for j in range(0x7a - 0x60):
