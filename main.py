@@ -70,6 +70,7 @@ def makeInput(size=0):
     for x in range(size * size):
         matrix[getX(x, size)].append(randomNumber(characters))
 
+    # print(matrix)
     return [matrix, size]
 
 
@@ -87,6 +88,8 @@ def getInput():
         inputPrompt = "Insert cell " + str(getX(i, size)) + " , " + str(getY(i, size)) + ": "
         matrix[getX(i, size)].append(input(inputPrompt))
 
+    print("This is your matrix: ")
+    print(matrix)
     return [matrix, size]
 
 
@@ -111,12 +114,15 @@ def getDeterminant(matrix=[]):
             print(pack)
         else:
             print("Learn to choose please...")
-            pack = makeInput(6)
+            pack = makeInput(4)
         matrix = pack[0]
         size = pack[1]
+        result = "This is the result: \n"
     else:
         size = len(matrix[0])
-    result = ""
+        result = ""
+
+
 
     # Solves a 2x2 determinant
 
@@ -152,12 +158,17 @@ def getDeterminant(matrix=[]):
             for j in range(size - 1):
                 column.append(matrix[i][j + 1])
             tinyDet.append(column)
-        print("tinyDET:")
-        print(tinyDet)
+        # print("tinyDET:")
+        # print(tinyDet)
         result += "[" + getDeterminant(tinyDet) + "]"
 
     # result.append(matrix[subDet][0] + " * (" + getDeterminant(tinyDet) )
+    result = result.replace("--", "+")
+    result = result.replace("+-", "-")
+    result = result.replace("-+", "-")
     return result
+
+
 
 
 print(getDeterminant())
