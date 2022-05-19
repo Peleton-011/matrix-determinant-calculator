@@ -1,4 +1,5 @@
 import random
+from copy import deepcopy
 
 yep = ["Y", "y"]
 nope = ["N", "n"]
@@ -218,9 +219,10 @@ def solveEquation(matrix=[]):
     numerators = []
 
     for i in range(size):
-        tempMatrix = matrix
+        tempMatrix = deepcopy(matrix)
         tempMatrix[i] = resultMatrix
         numerators.append(getDeterminant(tempMatrix))
+        print(tempMatrix)
 
     for i in range(size):
         returnText += " Var " + str(i + 1) + ":\n \n"
